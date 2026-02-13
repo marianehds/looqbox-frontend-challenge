@@ -1,3 +1,7 @@
+# Looqbox FrontEnd Challenge
+
+## Frontend Challenge – Mariane Halberstadt
+
 ### Would you like to work with us? Apply [here](https://looqbox.gupy.io/)!
 
 # Looqbox FrontEnd Challenge
