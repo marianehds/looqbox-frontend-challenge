@@ -51,8 +51,8 @@ export function Home() {
               defaultValue="Name"
               optionType="button"
             />
-
-            <Button type="default" size="large" onClick={handleSearch}>
+            <Divider variant="dashed" />
+            <Button type="default" size="large" onClick={handleSearch} block>
               Search
             </Button>
           </div>
