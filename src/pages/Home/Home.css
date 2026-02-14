@@ -1,5 +1,5 @@
 .home-row {
-  min-height: 90vh;
+  min-height: calc(100vh - 110px);
 }
 
 .carousel-content {
@@ -20,6 +20,7 @@
 }
 
 .search-container {
+  color: rgb(0, 28, 104);
   background-color: #00000054;
   padding: 20px;
   border-radius: 10px;

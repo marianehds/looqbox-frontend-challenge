@@ -53,7 +53,7 @@ export function Home() {
             />
             <Divider variant="dashed" />
             <Button type="default" size="large" onClick={handleSearch} block>
-              Search
+              Start
             </Button>
           </div>
         </Col>
