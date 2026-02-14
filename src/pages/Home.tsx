@@ -1,5 +1,6 @@
-import { Carousel, Col, Input, Row } from "antd";
+import { Carousel, Col, Divider, Input, Radio, Row } from "antd";
 import { slides } from "../assets/images/slides";
+import type { CheckboxGroupProps } from "antd/es/checkbox";
 
 const contentStyle: React.CSSProperties = {
   margin: 0,
@@ -12,6 +13,12 @@ const contentStyle: React.CSSProperties = {
   backgroundColor: "#fff",
 };
 
+const options: CheckboxGroupProps<string>["options"] = [
+  { label: "Name", value: "Name" },
+  { label: "Type", value: "Type" },
+  { label: "Species", value: "Species" },
+];
+
 export function Home() {
   return (
     <>
@@ -22,7 +29,7 @@ export function Home() {
         gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
       >
         <Col span={6}>
-          <Carousel autoplay dots={false} effect="fade" autoplaySpeed={4000} >
+          <Carousel autoplay dots={false} effect="fade" autoplaySpeed={4000}>
             {slides.map((slide, index) => (
               <div key={index}>
                 <div style={contentStyle}>
@@ -43,8 +50,16 @@ export function Home() {
             ))}
           </Carousel>
         </Col>
-        <Col span={6}>coluna de pesquisa
-        <Input size="large" />
+        <Col span={6}>
+          <h3>Search by:</h3>
+          <Input size="large" />
+          <Divider variant="dashed" />
+          <Radio.Group
+            block
+            options={options}
+            defaultValue="Name"
+            optionType="button"
+          />
         </Col>
       </Row>
     </>

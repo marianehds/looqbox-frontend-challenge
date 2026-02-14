@@ -1,5 +1,25 @@
-html, body {
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+* {
+  font-family: "Press Start 2P", system-ui, sans-serif !important;
+}
+
+html,
+body {
   margin: 0;
   padding: 0;
-  background-color: #f0f2f5;
+  font-family: "Press Start 2P", system-ui, sans-serif;
+}
+
+body {
+  position: relative;
+  background-color: rgba(5, 5, 5, 0.178);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("../src/assets/images/background.jpg");
+  opacity: 0.1;
 }
