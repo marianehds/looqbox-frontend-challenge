@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Home } from './pages/Home';
-import { PokemonDetails } from './pages/PokemonDetails';
-import { NotFound } from './pages/NotFound';
+import { Home } from './pages/Home/Home';
+import { PokemonDetails } from './pages/PokemonDetails/PokemonDetails';
+import { NotFound } from './pages/NotFound/NotFound';
 
 function App() {
   return (

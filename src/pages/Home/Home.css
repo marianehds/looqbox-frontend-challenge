@@ -1,0 +1,27 @@
+.home-row {
+  min-height: 90vh;
+}
+
+.carousel-content {
+  margin: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: #fff;
+}
+
+.carousel-image {
+  width: 100%;
+  object-fit: cover;
+  height: 500px;
+}
+
+.search-container {
+  background-color: #00000054;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}

@@ -1,7 +1,7 @@
 import { Button, Result } from "antd";
 import { useNavigate } from "react-router-dom";
 
-import notFoundImg from "../assets/images/notFound.jpg";
+import notFoundImg from "../../assets/images/notFound.jpg";
 
 export function NotFound() {
   const navigate = useNavigate();
