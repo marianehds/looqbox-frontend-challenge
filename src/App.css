@@ -14,11 +14,13 @@ body::before {
 
 .main-content {
   padding-top: 100px;
-  min-height: 100vh;
+  min-height: calc(100vh - 100px);
+  box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
   .main-content {
     padding-top: 70px;
+    min-height: calc(100vh - 70px);
   }
 }

@@ -40,8 +40,6 @@ const options: CheckboxGroupProps<string>["options"] = [
 export function Home() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  // Redux state
   const searchValue = useAppSelector(selectSearchValue);
   const searchType = useAppSelector(selectSearchType);
   const loading = useAppSelector(selectLoading);
@@ -53,7 +51,6 @@ export function Home() {
     dispatch(fetchPokemonList({ limit: 20, offset: 0 }));
   }, [dispatch]);
 
-  // Redirecionar quando pokemon for encontrado
   useEffect(() => {
     if (searchedPokemon && !loading) {
       navigate(`/pokemon/${searchedPokemon.name}`);
@@ -69,7 +66,8 @@ export function Home() {
   };
 
   const handlePokemonClick = (pokemonName: string) => {
-    //adicoinar chamada da api para buscar o pokemon e redirecionar
+    dispatch(searchPokemonByName(pokemonName));
+    navigate(`/pokemon/${pokemonName}`);
   };
 
   return (
