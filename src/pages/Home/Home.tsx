@@ -155,7 +155,7 @@ export function Home() {
             <Spin indicator={<LoadingOutlined spin />} size="large" />
           </div>
         ) : (
-          <Row gutter={[16, 16]} justify="center">
+          <Row gutter={[16, 16]} justify="center" className="pokemon-list-row">
             {pokemonList.map((pokemon) => (
               <Col xs={12} sm={8} md={6} lg={4} key={pokemon.name}>
                 <Card
@@ -169,6 +169,7 @@ export function Home() {
                         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
                           pokemon.url.split("/")[6]
                         }.png`}
+                        className="pokemon-list-image"
                       />
                     </div>
                   }

@@ -1,18 +1,65 @@
 .app-header {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  padding: 20px;
+  padding: 15px 20px;
   text-align: center;
-  z-index: 10;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, transparent 100%);
+  z-index: 1000;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 100%);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.header-back-button {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s;
+}
+
+.header-back-button:hover {
+  color: yellow !important;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.header-back-button .anticon {
+  font-size: 18px;
 }
 
 .pokedex-title {
   margin: 0;
-  font-size: 70px;
+  font-size: 48px;
   font-weight: bold;
-  text-shadow: 1px 3px 20px rgb(0, 28, 104);
+  text-shadow: 2px 2px 8px rgb(0, 28, 104);
   color: yellow;
+}
+
+@media (max-width: 768px) {
+  .pokedex-title {
+    font-size: 32px;
+  }
+  
+  .app-header {
+    padding: 10px 15px;
+  }
+
+  .header-back-button {
+    left: 10px;
+    font-size: 14px;
+  }
+
+  .header-back-button span:not(.anticon) {
+    display: none;
+  }
 }

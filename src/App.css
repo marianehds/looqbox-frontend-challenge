@@ -12,3 +12,13 @@ body::before {
   z-index: -1;
 }
 
+.main-content {
+  padding-top: 100px;
+  min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding-top: 70px;
+  }
+}

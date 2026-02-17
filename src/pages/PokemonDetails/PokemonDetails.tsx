@@ -1,23 +1,13 @@
-import { Button, Card, Tag, Spin, Row, Col, Typography } from "antd";
-import { ArrowLeftOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { Card, Tag, Spin, Row, Col, Typography } from "antd";
+import { useAppSelector } from "../../store/hooks";
 import { selectSearchedPokemon, selectLoading } from "../../store/pokemon/selectors";
-import { clearSearch } from "../../store/pokemon/slice";
 import "./PokemonDetails.css";
 
 const { Title, Text } = Typography;
 
 export function PokemonDetails() {
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const pokemon = useAppSelector(selectSearchedPokemon);
   const loading = useAppSelector(selectLoading);
-
-  const handleGoBack = () => {
-    dispatch(clearSearch());
-    navigate("/");
-  };
 
   if (loading) {
     return (
@@ -31,9 +21,7 @@ export function PokemonDetails() {
     return (
       <div className="pokemon-details-empty">
         <Title level={3}>No Pokémon found</Title>
-        <Button type="primary" icon={<ArrowLeftOutlined />} onClick={handleGoBack}>
-          Back to Home
-        </Button>
+        <Text type="secondary">Use the back button to return to the home page</Text>
       </div>
     );
   }
@@ -45,15 +33,6 @@ export function PokemonDetails() {
 
   return (
     <div className="pokemon-details-container">
-      <Button 
-        type="link" 
-        icon={<ArrowLeftOutlined />} 
-        onClick={handleGoBack}
-        className="back-button"
-      >
-        Back to Search
-      </Button>
-
       <Row gutter={[32, 32]} justify="center" align="middle">
         <Col xs={24} md={12} lg={8}>
           <Card
