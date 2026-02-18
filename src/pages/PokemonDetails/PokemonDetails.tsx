@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Card, Tag, Spin, Row, Col, Typography, Image } from "antd";
+import { Pie } from "@ant-design/charts";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
   selectSearchedPokemon,
@@ -36,7 +37,7 @@ export function PokemonDetails() {
   if (loading) {
     return (
       <div className="pokemon-details-loading">
-        <Spin size="large" tip="Loading Pokémon..." />
+        <Spin size="large" />
       </div>
     );
   }
@@ -56,6 +57,41 @@ export function PokemonDetails() {
     pokemon.sprites.other?.["official-artwork"]?.front_default ||
     pokemon.sprites.front_default ||
     "";
+
+  const statsPieData = pokemon.stats.map((s) => ({
+    type: STAT_LABELS[s.stat.name] ?? s.stat.name,
+    value: s.base_stat,
+  }));
+
+  const statsPieConfig = {
+    data: statsPieData,
+    angleField: "value",
+    colorField: "type",
+    radius: 0.9,
+    innerRadius: 0.6,
+    height: 240,
+    legend: {
+      position: "bottom",
+    },
+    label: {
+      text: (datum: { value: number }) => `${datum.value}`,
+      position: "outside",
+      style: {
+        fontSize: 11,
+        fontWeight: 700,
+      },
+    },
+    tooltip: {
+      items: [
+        (datum: { type: string; value: number }) => ({
+          name: datum.type,
+          value: datum.value,
+        }),
+      ],
+    },
+
+    interactions: [{ type: "element-active" }],
+  };
 
   return (
     <div className="pokemon-details-container">
@@ -90,7 +126,6 @@ export function PokemonDetails() {
               {pokemon.types.map((typeInfo) => (
                 <Tag
                   key={typeInfo.type.name}
-                  color="blue"
                   className={`type-tag type-${typeInfo.type.name}`}
                 >
                   {typeInfo.type.name.toUpperCase()}
@@ -138,22 +173,7 @@ export function PokemonDetails() {
             title="Status"
             style={{ marginTop: 16 }}
           >
-            <div className="pokemon-status-container">
-              {pokemon.stats.map((statItem) => {
-                const statName =
-                  STAT_LABELS[statItem.stat.name] ?? statItem.stat.name;
-                const statValue = statItem.base_stat;
-
-                return (
-                  <div key={statItem.stat.name}>
-                    <div className="pokemon-status-box">
-                      <span>{statName}</span>
-                      <span className="pokemon-stat-value">{statValue}</span>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+            <Pie {...statsPieConfig} />
           </Card>
         </Col>
       </Row>
