@@ -4,9 +4,10 @@ export const selectPokemonList = (state: RootState) => state.pokemon.list;
 export const selectTotal = (state: RootState) => state.pokemon.total;
 export const selectPage = (state: RootState) => state.pokemon.page;
 export const selectPageSize = (state: RootState) => state.pokemon.pageSize;
+export const selectSelectedType = (state: RootState) => state.pokemon.selectedType;
+export const selectTypeList = (state: RootState) => state.pokemon.typeList;
 
 export const selectSearchValue = (state: RootState) => state.pokemon.searchValue;
-export const selectSearchType = (state: RootState) => state.pokemon.searchType;
 export const selectSearchedPokemon = (state: RootState) => state.pokemon.searchedPokemon;
 export const selectIsSearching = (state: RootState) => state.pokemon.isSearching;
 

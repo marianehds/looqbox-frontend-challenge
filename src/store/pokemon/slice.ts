@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchPokemonList, searchPokemonByName } from "./thunks";
+import { fetchPokemonList, fetchPokemonByType, searchPokemonByName } from "./thunks";
 import type { Pokemon, PokemonListItem } from "./types";
 
 type State = {
@@ -9,9 +9,11 @@ type State = {
   pageSize: number;
   page: number;
 
+  selectedType: string | null;
+  typeList: PokemonListItem[];
+
   // busca
   searchValue: string;
-  searchType: string;
   searchedPokemon: Pokemon | null;
   isSearching: boolean;
 
@@ -26,8 +28,10 @@ const initialState: State = {
   pageSize: 20,
   page: 1,
 
+  selectedType: null,
+  typeList: [],
+
   searchValue: "",
-  searchType: "Name",
   searchedPokemon: null,
   isSearching: false,
 
@@ -42,14 +46,15 @@ const slice = createSlice({
     setSearchValue(state, action) {
       state.searchValue = action.payload;
     },
-    setSearchType(state, action) {
-      state.searchType = action.payload;
-    },
     clearSearch(state) {
       state.isSearching = false;
       state.searchedPokemon = null;
       state.error = null;
       state.searchValue = "";
+    },
+    clearTypeFilter(state) {
+      state.selectedType = null;
+      state.typeList = [];
     },
     setPage(state, action) {
       state.page = action.payload;
@@ -72,6 +77,22 @@ const slice = createSlice({
         state.error = action.error.message ?? "error";
       })
 
+      // FILTRO POR TIPO
+      .addCase(fetchPokemonByType.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+        state.selectedType = action.meta.arg;
+        state.typeList = [];
+      })
+      .addCase(fetchPokemonByType.fulfilled, (state, action) => {
+        state.loading = false;
+        state.typeList = action.payload;
+      })
+      .addCase(fetchPokemonByType.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message ?? "error";
+      })
+
       // BUSCA
       .addCase(searchPokemonByName.pending, (state) => {
         state.loading = true;
@@ -90,5 +111,5 @@ const slice = createSlice({
   },
 });
 
-export const { setSearchValue, setSearchType, clearSearch, setPage } = slice.actions;
+export const { setSearchValue, clearSearch, clearTypeFilter, setPage } = slice.actions;
 export default slice.reducer;

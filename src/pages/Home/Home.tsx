@@ -5,47 +5,45 @@ import {
   Col,
   Divider,
   Input,
-  Radio,
   Row,
   Alert,
   Spin,
 } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { slides } from "../../assets/images/slides";
-import type { CheckboxGroupProps } from "antd/es/checkbox";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
   searchPokemonByName,
   fetchPokemonList,
+  fetchPokemonByType,
 } from "../../store/pokemon/thunks";
-import { setSearchValue, setSearchType } from "../../store/pokemon/slice";
+import { setSearchValue, clearTypeFilter } from "../../store/pokemon/slice";
 import {
   selectSearchValue,
-  selectSearchType,
   selectLoading,
   selectError,
   selectSearchedPokemon,
   selectPokemonList,
+  selectSelectedType,
+  selectTypeList,
 } from "../../store/pokemon/selectors";
 import "./Home.css";
-
-const options: CheckboxGroupProps<string>["options"] = [
-  { label: "Name", value: "Name" },
-  { label: "Type", value: "Type", disabled: true },
-  { label: "Species", value: "Species", disabled: true },
-];
+import { types } from "../../assets/images/types";
 
 export function Home() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const searchValue = useAppSelector(selectSearchValue);
-  const searchType = useAppSelector(selectSearchType);
   const loading = useAppSelector(selectLoading);
   const error = useAppSelector(selectError);
   const searchedPokemon = useAppSelector(selectSearchedPokemon);
   const pokemonList = useAppSelector(selectPokemonList);
+  const selectedType = useAppSelector(selectSelectedType);
+  const typeList = useAppSelector(selectTypeList);
+
+  const displayList = selectedType ? typeList : pokemonList;
 
   useEffect(() => {
     dispatch(fetchPokemonList({ limit: 20, offset: 0 }));
@@ -59,15 +57,20 @@ export function Home() {
 
   const handleSearch = () => {
     if (!searchValue.trim()) return;
-
-    if (searchType === "Name") {
-      dispatch(searchPokemonByName(searchValue));
-    }
+    dispatch(searchPokemonByName(searchValue));
   };
 
   const handlePokemonClick = (pokemonName: string) => {
     dispatch(searchPokemonByName(pokemonName));
     navigate(`/pokemon/${pokemonName}`);
+  };
+
+  const handleTypeClick = (typeName: string) => {
+    if (selectedType === typeName) {
+      dispatch(clearTypeFilter());
+    } else {
+      dispatch(fetchPokemonByType(typeName));
+    }
   };
 
   return (
@@ -97,7 +100,7 @@ export function Home() {
 
         <Col span={6}>
           <div className="search-container">
-            <h3>Search by:</h3>
+            <h3 className="search-title">Search by name:</h3>
 
             <Input
               size="large"
@@ -105,17 +108,6 @@ export function Home() {
               value={searchValue}
               onChange={(e) => dispatch(setSearchValue(e.target.value))}
               onPressEnter={handleSearch}
-              disabled={loading}
-            />
-
-            <Divider variant="dashed" />
-
-            <Radio.Group
-              block
-              options={options}
-              value={searchType}
-              onChange={(e) => dispatch(setSearchType(e.target.value))}
-              optionType="button"
               disabled={loading}
             />
 
@@ -146,15 +138,47 @@ export function Home() {
       </Row>
 
       <div>
-        <h2 style={{ textAlign: "center" }}>Pokémon List</h2>
+        <h3 className="search-title">Search by type:</h3>
+        <div className="pokemon-types-section">
+          {types.map((type) => (
+            <div
+              className="type-badge"
+              onClick={() => handleTypeClick(type.name)}
+            >
+              <span>
+                <img
+                  src={type.image}
+                  alt={type.name}
+                  draggable={false}
+                  className="type-image"
+              
+                />
+              </span>
+            </div>
+          ))}
+        </div>
 
-        {loading && pokemonList.length === 0 ? (
+        {selectedType && (
+          <div style={{ textAlign: "center", marginBottom: "16px" }}>
+            <span className="type-filter-label">
+              Showing <strong>{selectedType}</strong>
+              <button
+                className="type-filter-clear"
+                onClick={() => dispatch(clearTypeFilter())}
+              >
+                ✕ Clear
+              </button>
+            </span>
+          </div>
+        )}
+
+        {loading ? (
           <div style={{ textAlign: "center", padding: "40px" }}>
             <Spin indicator={<LoadingOutlined spin />} size="large" />
           </div>
         ) : (
           <Row gutter={[16, 16]} justify="center" className="pokemon-list-row">
-            {pokemonList.map((pokemon) => (
+            {displayList.map((pokemon) => (
               <Col xs={12} sm={8} md={6} lg={4} key={pokemon.name}>
                 <Card
                   hoverable
