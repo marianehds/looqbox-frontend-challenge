@@ -47,7 +47,13 @@ export const SearchPokemon = () => {
       gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
     >
       <Col span={6}>
-        <Carousel autoplay dots={false} effect="fade" autoplaySpeed={4000}>
+        <Carousel
+          autoplay
+          dots={false}
+          effect="fade"
+          autoplaySpeed={4000}
+          className="carousel-container"
+        >
           {slides.map((slide, index) => (
             <div key={index}>
               <div className="carousel-content">

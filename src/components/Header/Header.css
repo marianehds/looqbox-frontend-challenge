@@ -41,8 +41,8 @@
   margin: 0;
   font-size: 48px;
   font-weight: bold;
-  text-shadow: 2px 2px 8px rgb(0, 28, 104);
-  color: yellow;
+  text-shadow: -9px 5px 13px rgb(0, 28, 104);
+  color: #d9d900;
 }
 
 @media (max-width: 768px) {
