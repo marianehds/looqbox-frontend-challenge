@@ -17,9 +17,9 @@ export const searchPokemonByName = createAsyncThunk<Pokemon, string, { rejectVal
       return await getPokemonByName(name);
     } catch (err) {
       if (err instanceof HttpError && err.status === 404) {
-        return rejectWithValue("Pokémon não encontrado");
+        return rejectWithValue("Pokémon not found");
       }
-      return rejectWithValue("Erro ao buscar Pokémon. Tente novamente.");
+      return rejectWithValue("Error searching for Pokemon. Try again.");
     }
   }
 );

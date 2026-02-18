@@ -3,7 +3,6 @@ import { fetchPokemonList, fetchPokemonByType, searchPokemonByName } from "./thu
 import type { Pokemon, PokemonListItem } from "./types";
 
 type State = {
-  // lista
   list: PokemonListItem[];
   total: number;
   pageSize: number;
@@ -12,12 +11,10 @@ type State = {
   selectedType: string | null;
   typeList: PokemonListItem[];
 
-  // busca
   searchValue: string;
   searchedPokemon: Pokemon | null;
   isSearching: boolean;
 
-  // ui
   loading: boolean;
   error: string | null;
 };
@@ -59,7 +56,6 @@ const slice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // LISTA
       .addCase(fetchPokemonList.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -74,7 +70,6 @@ const slice = createSlice({
         state.error = action.error.message ?? "error";
       })
 
-      // FILTRO POR TIPO
       .addCase(fetchPokemonByType.pending, (state, action) => {
         state.loading = true;
         state.error = null;
@@ -90,7 +85,6 @@ const slice = createSlice({
         state.error = action.error.message ?? "error";
       })
 
-      // BUSCA
       .addCase(searchPokemonByName.pending, (state) => {
         state.loading = true;
         state.error = null;
