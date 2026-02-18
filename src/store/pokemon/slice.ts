@@ -56,6 +56,9 @@ const slice = createSlice({
       state.selectedType = null;
       state.typeList = [];
     },
+    clearError(state) {
+      state.error = null;
+    },
     setPage(state, action) {
       state.page = action.payload;
     },
@@ -106,10 +109,10 @@ const slice = createSlice({
       .addCase(searchPokemonByName.rejected, (state, action) => {
         state.loading = false;
         state.searchedPokemon = null;
-        state.error = action.error.message ?? "error";
+        state.error = action.payload ?? action.error.message ?? "Erro ao buscar Pokémon.";
       });
   },
 });
 
-export const { setSearchValue, clearSearch, clearTypeFilter, setPage } = slice.actions;
+export const { setSearchValue, clearSearch, clearTypeFilter, clearError, setPage } = slice.actions;
 export default slice.reducer;
