@@ -58,3 +58,9 @@
 .type-filter-clear:hover {
   background: rgba(255, 255, 255, 0.2);
 }
+
+.pokemon-pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 16px 0 28px;
+}

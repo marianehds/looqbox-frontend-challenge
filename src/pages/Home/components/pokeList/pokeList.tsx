@@ -1,4 +1,4 @@
-import { Card, Col, Row, Spin, Image } from "antd";
+import { Card, Col, Row, Spin, Image, Pagination } from "antd";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
@@ -6,11 +6,14 @@ import {
   fetchPokemonList,
   fetchPokemonByType,
 } from "../../../../store/pokemon/thunks";
-import { clearTypeFilter } from "../../../../store/pokemon/slice";
+import { clearTypeFilter, setPage } from "../../../../store/pokemon/slice";
 import {
+  selectPage,
+  selectPageSize,
   selectLoading,
   selectPokemonList,
   selectSelectedType,
+  selectTotal,
   selectTypeList,
 } from "../../../../store/pokemon/selectors";
 import { types } from "../../../../assets/images/types";
@@ -21,18 +24,28 @@ export const PokeList = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const loading = useAppSelector(selectLoading);
+  const page = useAppSelector(selectPage);
+  const pageSize = useAppSelector(selectPageSize);
+  const total = useAppSelector(selectTotal);
   const pokemonList = useAppSelector(selectPokemonList);
   const selectedType = useAppSelector(selectSelectedType);
   const typeList = useAppSelector(selectTypeList);
-  const isListLoading = selectedType && loading;
+  const isTypeLoading = Boolean(selectedType) && loading;
+  const isHomeListLoading = !selectedType && loading;
 
   const displayList = selectedType ? typeList : pokemonList;
+  const offset = (page - 1) * pageSize;
+  const pagedList = selectedType
+    ? displayList.slice(offset, offset + pageSize)
+    : displayList;
+  const paginationTotal = selectedType ? displayList.length : total;
 
   useEffect(() => {
-    if (pokemonList.length === 0) {
-      dispatch(fetchPokemonList({ limit: 20, offset: 0 }));
+    if (!selectedType) {
+      const offset = (page - 1) * pageSize;
+      dispatch(fetchPokemonList({ limit: pageSize, offset }));
     }
-  }, [dispatch, pokemonList.length]);
+  }, [dispatch, page, pageSize, selectedType]);
 
   const handlePokemonClick = (pokemonName: string) => {
     navigate(`/pokemon/${pokemonName}`);
@@ -41,9 +54,15 @@ export const PokeList = () => {
   const handleTypeClick = (typeName: string) => {
     if (selectedType === typeName) {
       dispatch(clearTypeFilter());
+      dispatch(setPage(1));
     } else {
+      dispatch(setPage(1));
       dispatch(fetchPokemonByType(typeName));
     }
+  };
+
+  const handlePageChange = (nextPage: number) => {
+    dispatch(setPage(nextPage));
   };
 
   return (
@@ -52,6 +71,7 @@ export const PokeList = () => {
       <div className="pokemon-types-section">
         {types.map((type) => (
           <div
+            key={type.name}
             className="type-badge"
             onClick={() => handleTypeClick(type.name)}
           >
@@ -81,41 +101,53 @@ export const PokeList = () => {
         </div>
       )}
 
-      {isListLoading ? (
+      {isTypeLoading || isHomeListLoading ? (
         <div style={{ textAlign: "center", padding: "40px", height: "100vh" }}>
           <Spin size="large" />
         </div>
       ) : (
-        <Row gutter={[16, 16]} justify="center" className="pokemon-list-row">
-          {displayList.map((pokemon) => (
-            <Col xs={12} sm={8} md={6} lg={4} key={pokemon.name}>
-              <Card
-                hoverable
-                style={{ minHeight: 385 }}
-                onClick={() => handlePokemonClick(pokemon.name)}
-                cover={
-                  <div>
-                    <Image
-                      draggable={false}
-                      alt={pokemon.name}
-                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
-                        pokemon.url.split("/")[6]
-                      }.png`}
-                      className="pokemon-list-image"
-                      fallback={imageNotFound}
-                      preview={false}
-                    />
-                  </div>
-                }
-              >
-                <Card.Meta
-                  title={pokemon.name}
-                  description={`#${pokemon.url.split("/")[6].padStart(3, "0")}`}
-                />
-              </Card>
-            </Col>
-          ))}
-        </Row>
+        <>
+          <Row gutter={[16, 16]} justify="center" className="pokemon-list-row">
+            {pagedList.map((pokemon) => (
+              <Col xs={12} sm={8} md={6} lg={4} key={pokemon.name}>
+                <Card
+                  hoverable
+                  style={{ minHeight: 385 }}
+                  onClick={() => handlePokemonClick(pokemon.name)}
+                  cover={
+                    <div>
+                      <Image
+                        draggable={false}
+                        alt={pokemon.name}
+                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
+                          pokemon.url.split("/")[6]
+                        }.png`}
+                        className="pokemon-list-image"
+                        fallback={imageNotFound}
+                        preview={false}
+                      />
+                    </div>
+                  }
+                >
+                  <Card.Meta
+                    title={pokemon.name}
+                    description={`#${pokemon.url.split("/")[6].padStart(3, "0")}`}
+                  />
+                </Card>
+              </Col>
+            ))}
+          </Row>
+
+          <div className="pokemon-pagination-wrapper">
+            <Pagination
+              current={page}
+              total={paginationTotal}
+              pageSize={pageSize}
+              onChange={handlePageChange}
+              showSizeChanger={false}
+            />
+          </div>
+        </>
       )}
     </div>
   );

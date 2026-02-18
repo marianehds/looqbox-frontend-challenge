@@ -98,10 +98,12 @@ const slice = createSlice({
       })
       .addCase(searchPokemonByName.fulfilled, (state, action) => {
         state.loading = false;
+        state.isSearching = false;
         state.searchedPokemon = action.payload;
       })
       .addCase(searchPokemonByName.rejected, (state, action) => {
         state.loading = false;
+        state.isSearching = false;
         state.searchedPokemon = null;
         state.error = action.payload ?? action.error.message ?? "Erro ao buscar Pokémon.";
       });
