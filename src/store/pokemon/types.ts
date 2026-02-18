@@ -15,6 +15,7 @@ export type Pokemon = {
   name: string;
   sprites: {
     front_default: string | null;
+    back_default: string | null;
     other?: {
       ["official-artwork"]?: { front_default: string | null };
     };

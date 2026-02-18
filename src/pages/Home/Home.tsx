@@ -24,7 +24,6 @@ import {
   selectSearchValue,
   selectLoading,
   selectError,
-  selectSearchedPokemon,
   selectPokemonList,
   selectSelectedType,
   selectTypeList,
@@ -38,7 +37,6 @@ export function Home() {
   const searchValue = useAppSelector(selectSearchValue);
   const loading = useAppSelector(selectLoading);
   const error = useAppSelector(selectError);
-  const searchedPokemon = useAppSelector(selectSearchedPokemon);
   const pokemonList = useAppSelector(selectPokemonList);
   const selectedType = useAppSelector(selectSelectedType);
   const typeList = useAppSelector(selectTypeList);
@@ -49,15 +47,12 @@ export function Home() {
     dispatch(fetchPokemonList({ limit: 20, offset: 0 }));
   }, [dispatch]);
 
-  useEffect(() => {
-    if (searchedPokemon && !loading) {
-      navigate(`/pokemon/${searchedPokemon.name}`);
-    }
-  }, [searchedPokemon, loading, navigate]);
-
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (!searchValue.trim()) return;
-    dispatch(searchPokemonByName(searchValue));
+    const result = await dispatch(searchPokemonByName(searchValue));
+    if (searchPokemonByName.fulfilled.match(result)) {
+      navigate(`/pokemon/${result.payload.name}`);
+    }
   };
 
   const handlePokemonClick = (pokemonName: string) => {

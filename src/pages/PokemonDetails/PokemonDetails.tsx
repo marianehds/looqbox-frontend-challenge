@@ -1,13 +1,30 @@
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Card, Tag, Spin, Row, Col, Typography } from "antd";
-import { useAppSelector } from "../../store/hooks";
-import { selectSearchedPokemon, selectLoading } from "../../store/pokemon/selectors";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import {
+  selectSearchedPokemon,
+  selectLoading,
+} from "../../store/pokemon/selectors";
+import { searchPokemonByName } from "../../store/pokemon/thunks";
 import "./PokemonDetails.css";
 
 const { Title, Text } = Typography;
 
 export function PokemonDetails() {
+  const dispatch = useAppDispatch();
+  const { name: nameParam } = useParams<{ name: string }>();
   const pokemon = useAppSelector(selectSearchedPokemon);
   const loading = useAppSelector(selectLoading);
+
+  useEffect(() => {
+    if (nameParam && nameParam !== pokemon?.name) {
+      dispatch(searchPokemonByName(nameParam));
+    }
+  }, [nameParam, dispatch, pokemon?.name]);
+
+
+
 
   if (loading) {
     return (
@@ -21,7 +38,9 @@ export function PokemonDetails() {
     return (
       <div className="pokemon-details-empty">
         <Title level={3}>No Pokémon found</Title>
-        <Text type="secondary">Use the back button to return to the home page</Text>
+        <Text type="secondary">
+          Use the back button to return to the home page
+        </Text>
       </div>
     );
   }
@@ -71,13 +90,26 @@ export function PokemonDetails() {
             </div>
           </Card>
 
-          <Card className="pokemon-info-card" title="Sprites" style={{ marginTop: 16 }}>
+          <Card
+            className="pokemon-info-card"
+            title="Sprites"
+            style={{ marginTop: 16 }}
+          >
             <div className="pokemon-sprites">
               {pokemon.sprites.front_default && (
                 <img
                   src={pokemon.sprites.front_default}
                   alt={`${pokemon.name} front`}
                   className="sprite"
+                  draggable={false}
+                />
+              )}
+              {pokemon.sprites.back_default && (
+                <img
+                  src={pokemon.sprites.back_default}
+                  alt={`${pokemon.name} back`}
+                  className="sprite"
+                  draggable={false}
                 />
               )}
             </div>
@@ -87,4 +119,3 @@ export function PokemonDetails() {
     </div>
   );
 }
-  
