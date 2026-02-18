@@ -10,6 +10,16 @@ import { searchPokemonByName } from "../../store/pokemon/thunks";
 import "./PokemonDetails.css";
 
 const { Title, Text } = Typography;
+const MAX_BASE_STAT = 255;
+
+const STAT_LABELS: Record<string, string> = {
+  hp: "HP",
+  attack: "ATK",
+  defense: "DEF",
+  "special-attack": "SP. ATK",
+  "special-defense": "SP. DEF",
+  speed: "SPD",
+};
 
 export function PokemonDetails() {
   const dispatch = useAppDispatch();
@@ -22,9 +32,6 @@ export function PokemonDetails() {
       dispatch(searchPokemonByName(nameParam));
     }
   }, [nameParam, dispatch, pokemon?.name]);
-
-
-
 
   if (loading) {
     return (
@@ -112,6 +119,29 @@ export function PokemonDetails() {
                   draggable={false}
                 />
               )}
+            </div>
+          </Card>
+
+          <Card
+            className="pokemon-info-card"
+            title="Status"
+            style={{ marginTop: 16 }}
+          >
+            <div className="pokemon-status-container">
+              {pokemon.stats.map((statItem) => {
+                const statName =
+                  STAT_LABELS[statItem.stat.name] ?? statItem.stat.name;
+                const statValue = statItem.base_stat;
+
+                return (
+                  <div key={statItem.stat.name}>
+                    <div className="pokemon-status-box">
+                      <span>{statName}</span>
+                      <span className="pokemon-stat-value">{statValue}</span>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </Card>
         </Col>

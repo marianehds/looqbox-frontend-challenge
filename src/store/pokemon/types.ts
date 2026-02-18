@@ -21,6 +21,10 @@ export type Pokemon = {
     };
   };
   types: Array<{ type: { name: string } }>;
+  stats: Array<{
+    base_stat: number;
+    stat: { name: string };
+  }>;
 };
 
 export type PokemonTypeResponse = {
