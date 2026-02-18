@@ -21,12 +21,20 @@ describe("pokemon thunks", () => {
     mockedGetPokemonByName.mockResolvedValue({
       id: 25,
       name: "pikachu",
+      height: 4,
+      weight: 60,
+      base_experience: 112,
+      species: {
+        name: "pikachu",
+        url: "https://pokeapi.co/api/v2/pokemon-species/25/",
+      },
       sprites: {
         front_default: "front.png",
         back_default: "back.png",
         other: { "official-artwork": { front_default: "official.png" } },
       },
       types: [{ type: { name: "electric" } }],
+      abilities: [{ ability: { name: "static" } }],
       stats: [{ base_stat: 35, stat: { name: "hp" } }],
     });
 
@@ -44,7 +52,7 @@ describe("pokemon thunks", () => {
     const action = await searchPokemonByName("xxxx")(vi.fn(), vi.fn(), undefined);
 
     expect(searchPokemonByName.rejected.match(action)).toBe(true);
-    expect(action.payload).toBe("Pokémon não encontrado");
+    expect(action.payload).toBe("Pokémon not found");
   });
 
   it("searchPokemonByName deve retornar erro generico em falha nao-404", async () => {
@@ -53,7 +61,7 @@ describe("pokemon thunks", () => {
     const action = await searchPokemonByName("pikachu")(vi.fn(), vi.fn(), undefined);
 
     expect(searchPokemonByName.rejected.match(action)).toBe(true);
-    expect(action.payload).toBe("Erro ao buscar Pokémon. Tente novamente.");
+    expect(action.payload).toBe("Error searching for Pokemon. Try again.");
   });
 
   it("fetchPokemonByType deve mapear payload para lista de pokemon", async () => {
