@@ -112,7 +112,7 @@ export const PokeList = () => {
               <Col xs={12} sm={8} md={6} lg={4} key={pokemon.name}>
                 <Card
                   hoverable
-                  style={{ minHeight: 385 }}
+                  className="pokemon-list-card"
                   onClick={() => handlePokemonClick(pokemon.name)}
                   cover={
                     <div>

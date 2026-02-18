@@ -45,3 +45,41 @@
   text-shadow: 2px 2px 8px rgb(0, 28, 104);
   color: yellow;
 }
+
+@media (max-width: 768px) {
+  .home-row {
+    margin: 12px;
+    row-gap: 12px;
+  }
+
+  .carousel-image {
+    height: 240px;
+  }
+
+  .search-container {
+    padding: 14px;
+    gap: 12px;
+    min-height: 200px;
+    margin-top: 20px;
+
+  }
+
+  .search-title {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-row {
+    margin: 8px;
+  }
+
+  .carousel-image {
+    height: 200px;
+  }
+
+  .search-title {
+    font-size: 16px;
+  }
+}

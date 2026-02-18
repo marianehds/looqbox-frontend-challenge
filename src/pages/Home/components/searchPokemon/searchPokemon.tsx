@@ -46,7 +46,7 @@ export const SearchPokemon = () => {
       className="home-row"
       gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
     >
-      <Col span={6}>
+      <Col xs={24} sm={24} md={12} lg={6} xl={6}>
         <Carousel
           autoplay
           dots={false}
@@ -69,7 +69,7 @@ export const SearchPokemon = () => {
         </Carousel>
       </Col>
 
-      <Col span={6}>
+      <Col xs={24} sm={24} md={12} lg={6} xl={6}>
         <div className="search-container">
           <h3 className="search-title">Search by name:</h3>
 

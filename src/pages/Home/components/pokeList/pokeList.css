@@ -6,6 +6,10 @@
   width: inherit;
 }
 
+.pokemon-list-card {
+  min-height: 385px;
+}
+
 .type-image {
   width: 100px;
   height: 100px;
@@ -62,4 +66,33 @@
   display: flex;
   justify-content: center;
   padding: 16px 0 28px;
+}
+
+@media (max-width: 768px) {
+  .pokemon-list-row {
+    padding: 10px;
+  }
+
+  .pokemon-list-card {
+    min-height: 320px;
+  }
+
+  .type-image {
+    width: 64px;
+    height: 64px;
+  }
+
+  .type-badge {
+    padding: 4px 8px;
+  }
+
+  .type-filter-label {
+    font-size: 12px;
+    gap: 6px;
+    padding: 4px 10px;
+  }
+
+  .pokemon-pagination-wrapper {
+    padding: 10px 0 18px;
+  }
 }

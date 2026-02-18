@@ -27,6 +27,7 @@ A Single Page Application built with React to search and browse Pokémon using t
 
 ### Bonus features implemented
 
+- Mobile version available (responsive layout)
 - Pagination on the main list
 - Pagination on type-filtered results
 - Friendly error handling for name search
