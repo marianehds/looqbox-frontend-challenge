@@ -46,12 +46,6 @@ const slice = createSlice({
     setSearchValue(state, action) {
       state.searchValue = action.payload;
     },
-    clearSearch(state) {
-      state.isSearching = false;
-      state.searchedPokemon = null;
-      state.error = null;
-      state.searchValue = "";
-    },
     clearTypeFilter(state) {
       state.selectedType = null;
       state.typeList = [];
@@ -114,5 +108,5 @@ const slice = createSlice({
   },
 });
 
-export const { setSearchValue, clearSearch, clearTypeFilter, clearError, setPage } = slice.actions;
+export const { setSearchValue, clearTypeFilter, clearError, setPage } = slice.actions;
 export default slice.reducer;
