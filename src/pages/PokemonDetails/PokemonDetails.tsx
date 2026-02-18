@@ -135,19 +135,23 @@ export function PokemonDetails() {
 
   return (
     <div className="pokemon-details-container">
-      <Row align="middle" className="pokemon-details-row">
-        <Col>
+      <Row
+        align="middle"
+        className="pokemon-details-row"
+        gutter={[
+          { xs: 12, sm: 16, md: 20, lg: 24 },
+          { xs: 12, sm: 16, md: 20, lg: 24 },
+        ]}
+      >
+        <Col xs={24} md={12} lg={8}>
           <PokemonHeroCard pokemon={pokemon} />
         </Col>
 
         <Col xs={24} md={12} lg={8}>
-          <PokemonAboutCard
-            pokemon={pokemon}
-            speciesDetails={speciesDetails}
-          />
+          <PokemonAboutCard pokemon={pokemon} speciesDetails={speciesDetails} />
           <PokemonSpritesCard pokemon={pokemon} />
         </Col>
-        <Col>
+        <Col xs={24} md={12} lg={8}>
           <PokemonEvolutionCard
             loading={speciesDetails.loading}
             evolutionNames={evolutionNames}
