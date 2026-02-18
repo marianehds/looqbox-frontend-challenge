@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Card, Tag, Spin, Row, Col, Typography } from "antd";
+import { Card, Tag, Spin, Row, Col, Typography, Image } from "antd";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
   selectSearchedPokemon,
   selectLoading,
 } from "../../store/pokemon/selectors";
 import { searchPokemonByName } from "../../store/pokemon/thunks";
+import { imageNotFound } from "../../assets/const/imageNotFound";
 import "./PokemonDetails.css";
 
 const { Title, Text } = Typography;
-const MAX_BASE_STAT = 255;
 
 const STAT_LABELS: Record<string, string> = {
   hp: "HP",
@@ -65,10 +65,12 @@ export function PokemonDetails() {
             className="pokemon-card"
             cover={
               <div className="pokemon-image-container">
-                <img
+                <Image
                   alt={pokemon.name}
                   src={imageUrl}
                   className="pokemon-image"
+                  preview={false}
+                  fallback={imageNotFound}
                 />
               </div>
             }
@@ -103,21 +105,30 @@ export function PokemonDetails() {
             style={{ marginTop: 16 }}
           >
             <div className="pokemon-sprites">
-              {pokemon.sprites.front_default && (
-                <img
-                  src={pokemon.sprites.front_default}
-                  alt={`${pokemon.name} front`}
-                  className="sprite"
-                  draggable={false}
-                />
-              )}
-              {pokemon.sprites.back_default && (
-                <img
-                  src={pokemon.sprites.back_default}
-                  alt={`${pokemon.name} back`}
-                  className="sprite"
-                  draggable={false}
-                />
+              {!pokemon.sprites.front_default &&
+              !pokemon.sprites.back_default ? (
+                <span>No sprites available</span>
+              ) : (
+                <>
+                  {pokemon.sprites.front_default && (
+                    <Image
+                      src={pokemon.sprites.front_default}
+                      alt={`${pokemon.name} front`}
+                      className="sprite"
+                      draggable={false}
+                      preview={false}
+                    />
+                  )}
+                  {pokemon.sprites.back_default && (
+                    <Image
+                      src={pokemon.sprites.back_default}
+                      alt={`${pokemon.name} back`}
+                      className="sprite"
+                      draggable={false}
+                      preview={false}
+                    />
+                  )}
+                </>
               )}
             </div>
           </Card>

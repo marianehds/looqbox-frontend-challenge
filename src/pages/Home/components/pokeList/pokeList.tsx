@@ -1,4 +1,4 @@
-import { Card, Col, Row, Spin } from "antd";
+import { Card, Col, Row, Spin, Image } from "antd";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
@@ -14,6 +14,7 @@ import {
   selectTypeList,
 } from "../../../../store/pokemon/selectors";
 import { types } from "../../../../assets/images/types";
+import { imageNotFound } from "../../../../assets/const/imageNotFound";
 import "./pokeList.css";
 
 export const PokeList = () => {
@@ -90,16 +91,19 @@ export const PokeList = () => {
             <Col xs={12} sm={8} md={6} lg={4} key={pokemon.name}>
               <Card
                 hoverable
+                style={{ minHeight: 385 }}
                 onClick={() => handlePokemonClick(pokemon.name)}
                 cover={
                   <div>
-                    <img
+                    <Image
                       draggable={false}
                       alt={pokemon.name}
                       src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
                         pokemon.url.split("/")[6]
                       }.png`}
                       className="pokemon-list-image"
+                      fallback={imageNotFound}
+                      preview={false}
                     />
                   </div>
                 }
