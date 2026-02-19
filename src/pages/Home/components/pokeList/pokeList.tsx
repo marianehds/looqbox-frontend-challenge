@@ -101,13 +101,28 @@ export const PokeList = () => {
         </div>
       )}
 
+      <div className={styles.pokemonPaginationWrapper}>
+        <Pagination
+          current={page}
+          simple
+          total={paginationTotal}
+          pageSize={pageSize}
+          onChange={handlePageChange}
+          showSizeChanger={false}
+        />
+      </div>
+
       {isTypeLoading || isHomeListLoading ? (
         <div style={{ textAlign: "center", padding: "40px", height: "100vh" }}>
           <Spin size="large" />
         </div>
       ) : (
         <>
-          <Row gutter={[16, 16]} justify="center" className={styles.pokemonListRow}>
+          <Row
+            gutter={[16, 16]}
+            justify="center"
+            className={styles.pokemonListRow}
+          >
             {pagedList.map((pokemon) => (
               <Col xs={12} sm={8} md={6} lg={4} key={pokemon.name}>
                 <Card
@@ -141,6 +156,7 @@ export const PokeList = () => {
           <div className={styles.pokemonPaginationWrapper}>
             <Pagination
               current={page}
+              simple
               total={paginationTotal}
               pageSize={pageSize}
               onChange={handlePageChange}
