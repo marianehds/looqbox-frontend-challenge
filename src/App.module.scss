@@ -16,10 +16,8 @@
   padding-top: 100px;
   min-height: calc(100vh - 100px);
   box-sizing: border-box;
-}
 
-@media (max-width: 768px) {
-  .mainContent {
+  @media (max-width: 768px) {
     padding-top: 70px;
     min-height: calc(100vh - 70px);
   }

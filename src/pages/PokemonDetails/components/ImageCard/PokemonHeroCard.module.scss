@@ -13,33 +13,29 @@
   max-width: 300px;
   height: auto;
   filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+
+  @media (max-width: 992px) {
+    max-width: 240px;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 200px;
+  }
 }
 
 .pokemonName {
   margin-top: 16px;
+
+  @media (max-width: 768px) {
+    font-size: 22px !important;
+  }
 }
 
 .pokemonId {
   font-size: 18px;
   color: #888;
-}
 
-@media (max-width: 992px) {
-  .pokemonImage {
-    max-width: 240px;
-  }
-}
-
-@media (max-width: 768px) {
-  .pokemonImage {
-    max-width: 200px;
-  }
-
-  .pokemonName {
-    font-size: 22px !important;
-  }
-
-  .pokemonId {
+  @media (max-width: 768px) {
     font-size: 14px;
   }
 }

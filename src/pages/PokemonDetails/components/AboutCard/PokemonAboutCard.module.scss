@@ -25,21 +25,25 @@
   flex-direction: column;
   gap: 4px;
   color: #615454;
-}
 
-.pokemonAboutItemFull {
-  grid-column: 1 / -1;
-}
+  span {
+    font-size: 10px;
+    opacity: 0.8;
+    text-transform: uppercase;
 
-.pokemonAboutItem span {
-  font-size: 10px;
-  opacity: 0.8;
-  text-transform: uppercase;
-}
+    @media (max-width: 768px) {
+      font-size: 9px;
+    }
+  }
 
-.pokemonAboutItem strong {
-  font-size: 12px;
-  text-transform: capitalize;
+  strong {
+    font-size: 12px;
+    text-transform: capitalize;
+
+    @media (max-width: 768px) {
+      font-size: 11px;
+    }
+  }
 }
 
 .pokemonFlavorText {
@@ -61,20 +65,16 @@
   border: none !important;
 }
 
+.pokemonAboutItemFull {
+  grid-column: 1 / -1;
+
+  @media (max-width: 768px) {
+    grid-column: auto;
+  }
+}
+
 @media (max-width: 768px) {
   .pokemonAboutGrid {
     grid-template-columns: 1fr;
-  }
-
-  .pokemonAboutItemFull {
-    grid-column: auto;
-  }
-
-  .pokemonAboutItem span {
-    font-size: 9px;
-  }
-
-  .pokemonAboutItem strong {
-    font-size: 11px;
   }
 }
