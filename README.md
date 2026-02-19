@@ -112,5 +112,5 @@ They cover reducers, async actions, error handling, and payload mapping.
 
 ## Notes
 
-- Name search handles PokeAPI `404` with a friendly message: `Pokémon não encontrado`.
+- Name search handles PokeAPI `404` with a friendly message: `Pokémon not found`.
 - Images use a fallback to avoid broken sprites when some URLs fail.
