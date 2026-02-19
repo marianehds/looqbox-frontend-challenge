@@ -1,5 +1,6 @@
 import { Card, Image } from "antd";
-import type { Pokemon } from "../../../store/pokemon/types";
+import type { Pokemon } from "../../../../store/pokemon/types";
+import styles from "./PokemonSpritesCard.module.scss";
 
 type Props = {
   pokemon: Pokemon;
@@ -7,8 +8,8 @@ type Props = {
 
 export function PokemonSpritesCard({ pokemon }: Props) {
   return (
-    <Card className="pokemon-info-card" title="Sprites" style={{ marginTop: 16 }}>
-      <div className="pokemon-sprites">
+    <Card className={styles.pokemonInfoCard} title="Sprites">
+      <div className={styles.pokemonSprites}>
         {!pokemon.sprites.front_default && !pokemon.sprites.back_default ? (
           <span>No sprites available</span>
         ) : (
@@ -17,7 +18,7 @@ export function PokemonSpritesCard({ pokemon }: Props) {
               <Image
                 src={pokemon.sprites.front_default}
                 alt={`${pokemon.name} front`}
-                className="sprite"
+                className={styles.sprite}
                 draggable={false}
                 preview={false}
               />
@@ -26,7 +27,7 @@ export function PokemonSpritesCard({ pokemon }: Props) {
               <Image
                 src={pokemon.sprites.back_default}
                 alt={`${pokemon.name} back`}
-                className="sprite"
+                className={styles.sprite}
                 draggable={false}
                 preview={false}
               />

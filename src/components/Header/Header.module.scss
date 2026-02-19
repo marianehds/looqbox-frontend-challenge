@@ -1,20 +1,24 @@
-.app-header {
+.appHeader {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 100px;      
-  padding: 0 20px; 
+  height: 100px;
+  padding: 0 20px;
   text-align: center;
   z-index: 1000;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
   backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.header-back-button {
+.headerBackButton {
   position: absolute;
   left: 20px;
   top: 50%;
@@ -28,16 +32,16 @@
   transition: all 0.3s;
 }
 
-.header-back-button:hover {
+.headerBackButton:hover {
   color: yellow !important;
   transform: translateY(-50%) scale(1.05);
 }
 
-.header-back-button .anticon {
+.headerBackButton :global(.anticon) {
   font-size: 18px;
 }
 
-.pokedex-title {
+.pokedexTitle {
   margin: 0;
   font-size: 48px;
   font-weight: bold;
@@ -46,20 +50,20 @@
 }
 
 @media (max-width: 768px) {
-  .pokedex-title {
+  .pokedexTitle {
     font-size: 32px;
   }
-  
-  .app-header {
+
+  .appHeader {
     padding: 10px 15px;
   }
 
-  .header-back-button {
+  .headerBackButton {
     left: 10px;
     font-size: 14px;
   }
 
-  .header-back-button span:not(.anticon) {
+  .headerBackButton :global(.ant-btn-icon + span) {
     display: none;
   }
 }

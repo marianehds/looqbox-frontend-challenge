@@ -1,6 +1,7 @@
 import { Card } from "antd";
 import { Pie } from "@ant-design/charts";
-import type { Pokemon } from "../../../store/pokemon/types";
+import type { Pokemon } from "../../../../store/pokemon/types";
+import styles from "./PokemonStatsCard.module.scss";
 
 const STAT_LABELS: Record<string, string> = {
   hp: "HP",
@@ -51,7 +52,7 @@ export function PokemonStatsCard({ pokemon }: Props) {
   };
 
   return (
-    <Card className="pokemon-info-card" title="Status" style={{ marginTop: 16 }}>
+    <Card className={styles.pokemonInfoCard} title="Stats">
       <Pie {...statsPieConfig} />
     </Card>
   );

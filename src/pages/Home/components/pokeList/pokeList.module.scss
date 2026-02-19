@@ -1,21 +1,21 @@
-.pokemon-list-row {
+.pokemonListRow {
   padding: 20px;
 }
 
-.pokemon-list-image {
+.pokemonListImage {
   width: inherit;
 }
 
-.pokemon-list-card {
+.pokemonListCard {
   min-height: 385px;
 }
 
-.type-image {
+.typeImage {
   width: 100px;
   height: 100px;
   object-fit: cover;
 }
-.pokemon-types-section {
+.pokemonTypesSection {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -23,20 +23,31 @@
   margin-bottom: 10px;
 }
 
-.type-badge {
+.typeTitle {
+  text-align: center;
+  color: yellow;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 0 20px;
+  text-shadow: 2px 2px 8px rgb(0, 28, 104);
+}
+
+.typeBadge {
   display: flex;
   align-items: center;
   padding: 6px 14px;
   border-radius: 20px;
   cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
-  user-select: none; 
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+  user-select: none;
 }
-.type-badge:hover {
+.typeBadge:hover {
   transform: translateY(-3px);
 }
 
-.type-filter-label {
+.typeFilterLabel {
   color: #fff;
   font-size: 14px;
   background: rgba(0, 0, 0, 0.4);
@@ -47,7 +58,7 @@
   gap: 10px;
 }
 
-.type-filter-clear {
+.typeFilterClear {
   background: none;
   border: 1px solid rgba(255, 255, 255, 0.5);
   color: #fff;
@@ -58,41 +69,46 @@
   transition: background 0.2s;
 }
 
-.type-filter-clear:hover {
+.typeFilterClear:hover {
   background: rgba(255, 255, 255, 0.2);
 }
 
-.pokemon-pagination-wrapper {
+.pokemonPaginationWrapper {
   display: flex;
   justify-content: center;
   padding: 16px 0 28px;
 }
 
 @media (max-width: 768px) {
-  .pokemon-list-row {
+  .pokemonListRow {
     padding: 10px;
   }
 
-  .pokemon-list-card {
+  .pokemonListCard {
     min-height: 320px;
   }
 
-  .type-image {
+  .typeImage {
     width: 64px;
     height: 64px;
   }
 
-  .type-badge {
+  .typeTitle {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  .typeBadge {
     padding: 4px 8px;
   }
 
-  .type-filter-label {
+  .typeFilterLabel {
     font-size: 12px;
     gap: 6px;
     padding: 4px 10px;
   }
 
-  .pokemon-pagination-wrapper {
+  .pokemonPaginationWrapper {
     padding: 10px 0 18px;
   }
 }

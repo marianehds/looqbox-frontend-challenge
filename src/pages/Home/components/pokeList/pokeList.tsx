@@ -18,7 +18,7 @@ import {
 } from "../../../../store/pokemon/selectors";
 import { types } from "../../../../assets/images/types";
 import { imageNotFound } from "../../../../assets/const/imageNotFound";
-import "./pokeList.css";
+import styles from "./pokeList.module.scss";
 
 export const PokeList = () => {
   const dispatch = useAppDispatch();
@@ -67,12 +67,12 @@ export const PokeList = () => {
 
   return (
     <div>
-      <h3 className="search-title">Search by type:</h3>
-      <div className="pokemon-types-section">
+      <h3 className={styles.typeTitle}>Search by type:</h3>
+      <div className={styles.pokemonTypesSection}>
         {types.map((type) => (
           <div
             key={type.name}
-            className="type-badge"
+            className={styles.typeBadge}
             onClick={() => handleTypeClick(type.name)}
           >
             <span>
@@ -80,7 +80,7 @@ export const PokeList = () => {
                 src={type.image}
                 alt={type.name}
                 draggable={false}
-                className="type-image"
+                className={styles.typeImage}
               />
             </span>
           </div>
@@ -89,10 +89,10 @@ export const PokeList = () => {
 
       {selectedType && (
         <div style={{ textAlign: "center", marginBottom: "16px" }}>
-          <span className="type-filter-label">
+          <span className={styles.typeFilterLabel}>
             Showing <strong>{selectedType}</strong>
             <button
-              className="type-filter-clear"
+              className={styles.typeFilterClear}
               onClick={() => dispatch(clearTypeFilter())}
             >
               ✕ Clear
@@ -107,12 +107,12 @@ export const PokeList = () => {
         </div>
       ) : (
         <>
-          <Row gutter={[16, 16]} justify="center" className="pokemon-list-row">
+          <Row gutter={[16, 16]} justify="center" className={styles.pokemonListRow}>
             {pagedList.map((pokemon) => (
               <Col xs={12} sm={8} md={6} lg={4} key={pokemon.name}>
                 <Card
                   hoverable
-                  className="pokemon-list-card"
+                  className={styles.pokemonListCard}
                   onClick={() => handlePokemonClick(pokemon.name)}
                   cover={
                     <div>
@@ -122,7 +122,7 @@ export const PokeList = () => {
                         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
                           pokemon.url.split("/")[6]
                         }.png`}
-                        className="pokemon-list-image"
+                        className={styles.pokemonListImage}
                         fallback={imageNotFound}
                         preview={false}
                       />
@@ -138,7 +138,7 @@ export const PokeList = () => {
             ))}
           </Row>
 
-          <div className="pokemon-pagination-wrapper">
+          <div className={styles.pokemonPaginationWrapper}>
             <Pagination
               current={page}
               total={paginationTotal}

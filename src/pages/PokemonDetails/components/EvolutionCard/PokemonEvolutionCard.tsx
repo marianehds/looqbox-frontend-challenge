@@ -1,4 +1,5 @@
 import { Card, Spin, Typography } from "antd";
+import styles from "./PokemonEvolutionCard.module.scss";
 
 const { Text } = Typography;
 
@@ -16,18 +17,18 @@ export function PokemonEvolutionCard({
   onEvolutionClick,
 }: Props) {
   return (
-    <Card className="pokemon-info-card" title="Evolution Chain" style={{ marginTop: 16 }}>
+    <Card className={styles.pokemonInfoCard} title="Evolution Chain">
       {loading ? (
-        <div className="pokemon-subloading">
+        <div className={styles.pokemonSubloading}>
           <Spin size="small" />
         </div>
       ) : evolutionNames.length > 0 ? (
-        <div className="pokemon-evolution-list">
+        <div className={styles.pokemonEvolutionList}>
           {evolutionNames.map((evolutionName) => (
             <button
               key={evolutionName}
               type="button"
-              className={`evolution-chip ${evolutionName === currentPokemonName ? "evolution-chip--active" : ""}`}
+              className={`${styles.evolutionChip} ${evolutionName === currentPokemonName ? styles.evolutionChipActive : ""}`}
               onClick={() => onEvolutionClick(evolutionName)}
             >
               {evolutionName}

@@ -1,7 +1,7 @@
-export { PokemonHeroCard } from "./PokemonHeroCard";
-export { PokemonTypesCard } from "./PokemonTypesCard";
-export { PokemonSpritesCard } from "./PokemonSpritesCard";
-export { PokemonStatsCard } from "./PokemonStatsCard";
-export { PokemonAboutCard } from "./PokemonAboutCard";
-export type { SpeciesDetails } from "./PokemonAboutCard";
-export { PokemonEvolutionCard } from "./PokemonEvolutionCard";
+export { PokemonHeroCard } from "./ImageCard/PokemonHeroCard";
+export { PokemonTypesCard } from "./TypesCard/PokemonTypesCard";
+export { PokemonSpritesCard } from "./SpritesCard/PokemonSpritesCard";
+export { PokemonStatsCard } from "./StatsCard/PokemonStatsCard";
+export { PokemonAboutCard } from "./AboutCard/PokemonAboutCard";
+export type { SpeciesDetails } from "./AboutCard/PokemonAboutCard";
+export { PokemonEvolutionCard } from "./EvolutionCard/PokemonEvolutionCard";

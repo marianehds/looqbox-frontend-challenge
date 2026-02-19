@@ -15,7 +15,7 @@ import {
   selectError,
   selectPokemonList,
 } from "../../../../store/pokemon/selectors";
-import "./searchPokemon.css";
+import styles from "./searchPokemon.module.scss";
 
 export const SearchPokemon = () => {
   const error = useAppSelector(selectError);
@@ -43,7 +43,7 @@ export const SearchPokemon = () => {
     <Row
       justify="center"
       align="middle"
-      className="home-row"
+      className={styles.homeRow}
       gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
     >
       <Col xs={24} sm={24} md={12} lg={6} xl={6}>
@@ -52,15 +52,15 @@ export const SearchPokemon = () => {
           dots={false}
           effect="fade"
           autoplaySpeed={4000}
-          className="carousel-container"
+          className={styles.carouselContainer}
         >
           {slides.map((slide, index) => (
             <div key={index}>
-              <div className="carousel-content">
+              <div className={styles.carouselContent}>
                 <img
                   src={slide.image}
                   alt={slide.name}
-                  className="carousel-image"
+                  className={styles.carouselImage}
                 />
                 <h2>{slide.name}</h2>
               </div>
@@ -70,8 +70,8 @@ export const SearchPokemon = () => {
       </Col>
 
       <Col xs={24} sm={24} md={12} lg={6} xl={6}>
-        <div className="search-container">
-          <h3 className="search-title">Search by name:</h3>
+        <div className={styles.searchContainer}>
+          <h3 className={styles.searchTitle}>Search by name:</h3>
 
           <Input
             size="large"

@@ -1,5 +1,6 @@
 import { Card, Divider, Spin, Tag, Typography } from "antd";
-import type { Pokemon } from "../../../store/pokemon/types";
+import type { Pokemon } from "../../../../store/pokemon/types";
+import styles from "./PokemonAboutCard.module.scss";
 
 const { Text } = Typography;
 
@@ -23,39 +24,39 @@ export function PokemonAboutCard({ pokemon, speciesDetails }: Props) {
   const heightM = (pokemon.height / 10).toFixed(1);
 
   return (
-    <Card className="pokemon-info-card" title="About" style={{ marginTop: 16 }}>
+    <Card className={styles.pokemonInfoCard} title="About">
       {loading ? (
-        <div className="pokemon-subloading">
+        <div className={styles.pokemonSubloading}>
           <Spin size="small" />
         </div>
       ) : (
-        <div className="pokemon-about-grid">
-          <div className="pokemon-about-item">
+        <div className={styles.pokemonAboutGrid}>
+          <div className={styles.pokemonAboutItem}>
             <span>Height</span>
             <strong>{heightM} m</strong>
           </div>
-          <div className="pokemon-about-item">
+          <div className={styles.pokemonAboutItem}>
             <span>Weight</span>
             <strong>{weightKg} kg</strong>
           </div>
-          <div className="pokemon-about-item">
+          <div className={styles.pokemonAboutItem}>
             <span>Base Exp</span>
             <strong>{pokemon.base_experience}</strong>
           </div>
-          <div className="pokemon-about-item">
+          <div className={styles.pokemonAboutItem}>
             <span>Capture Rate</span>
             <strong>{captureRate ?? "-"}</strong>
           </div>
-          <div className="pokemon-about-item">
+          <div className={styles.pokemonAboutItem}>
             <span>Habitat</span>
             <strong>{habitat ?? "-"}</strong>
           </div>
-          <div className="pokemon-about-item">
+          <div className={styles.pokemonAboutItem}>
             <span>Growth Rate</span>
             <strong>{growthRate ?? "-"}</strong>
           </div>
           {genus && (
-            <div className="pokemon-about-item pokemon-about-item--full">
+            <div className={`${styles.pokemonAboutItem} ${styles.pokemonAboutItemFull}`}>
               <span>Genus</span>
               <strong>{genus}</strong>
             </div>
@@ -64,12 +65,12 @@ export function PokemonAboutCard({ pokemon, speciesDetails }: Props) {
       )}
 
       <Divider style={{ margin: "12px 0" }} />
-      <Text className="pokemon-flavor-text">{flavorText}</Text>
+      <Text className={styles.pokemonFlavorText}>{flavorText}</Text>
 
       <Divider style={{ margin: "12px 0" }} />
-      <div className="pokemon-abilities">
+      <div className={styles.pokemonAbilities}>
         {pokemon.abilities.map((ability) => (
-          <Tag key={ability.ability.name} className="ability-tag">
+          <Tag key={ability.ability.name} className={styles.abilityTag}>
             {ability.ability.name.toUpperCase()}
           </Tag>
         ))}

@@ -1,9 +1,9 @@
-.home-row {
+.homeRow {
   min-height: auto;
   margin: 40px;
 }
 
-.carousel-content {
+.carouselContent {
   margin: 0;
   text-align: center;
   display: flex;
@@ -14,20 +14,19 @@
   background-color: #fff;
 }
 
-.carousel-container{
+.carouselContainer {
   box-shadow: 0px -1px 20px 5px rgb(0 0 0 / 64%);
-  
 }
 
-.carousel-image {
+.carouselImage {
   width: 100%;
   object-fit: cover;
   height: 500px;
 }
 
-.search-container {
+.searchContainer {
   color: rgb(0, 28, 104);
-  background-color:#02040a8f;
+  background-color: #02040a8f;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px -1px 20px 5px rgb(0 0 0 / 64%);
@@ -36,7 +35,7 @@
   flex-direction: column;
 }
 
-.search-title {
+.searchTitle {
   text-align: center;
   color: rgb(0, 28, 104);
   font-size: 24px;
@@ -47,39 +46,38 @@
 }
 
 @media (max-width: 768px) {
-  .home-row {
+  .homeRow {
     margin: 12px;
     row-gap: 12px;
   }
 
-  .carousel-image {
+  .carouselImage {
     height: 240px;
   }
 
-  .search-container {
+  .searchContainer {
     padding: 14px;
     gap: 12px;
     min-height: 200px;
     margin-top: 20px;
-
   }
 
-  .search-title {
+  .searchTitle {
     font-size: 18px;
     margin-bottom: 12px;
   }
 }
 
 @media (max-width: 480px) {
-  .home-row {
+  .homeRow {
     margin: 8px;
   }
 
-  .carousel-image {
+  .carouselImage {
     height: 200px;
   }
 
-  .search-title {
+  .searchTitle {
     font-size: 16px;
   }
 }

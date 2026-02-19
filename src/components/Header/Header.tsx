@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
-import "./Header.css";
+import styles from "./Header.module.scss";
 
 export function Header() {
   const location = useLocation();
@@ -13,18 +13,18 @@ export function Header() {
   };
 
   return (
-    <header className="app-header">
+    <header className={styles.appHeader}>
       {isDetailsPage && (
         <Button
           type="text"
           icon={<ArrowLeftOutlined />}
           onClick={handleGoBack}
-          className="header-back-button"
+          className={styles.headerBackButton}
         >
           Back
         </Button>
       )}
-      <h1 className="pokedex-title">Pokédex</h1>
+      <h1 className={styles.pokedexTitle}>Pokédex</h1>
     </header>
   );
 }

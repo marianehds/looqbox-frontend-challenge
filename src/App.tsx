@@ -3,13 +3,13 @@ import { Header } from "./components/Header";
 import { Home } from "./pages/Home/Home";
 import { PokemonDetails } from "./pages/PokemonDetails/PokemonDetails";
 import { NotFound } from "./pages/NotFound/NotFound";
-import "./App.css";
+import styles from "./App.module.scss";
 
 function App() {
   return (
     <BrowserRouter>
       <Header />
-      <main className="main-content">
+      <main className={styles.mainContent}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/pokemon/:name" element={<PokemonDetails />} />

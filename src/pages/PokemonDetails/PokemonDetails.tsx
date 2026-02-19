@@ -18,7 +18,7 @@ import {
   PokemonTypesCard,
   type SpeciesDetails,
 } from "./components";
-import "./PokemonDetails.css";
+import styles from "./PokemonDetails.module.scss";
 
 const { Title, Text } = Typography;
 
@@ -112,7 +112,7 @@ export function PokemonDetails() {
 
   if (loading) {
     return (
-      <div className="pokemon-details-loading">
+      <div className={styles.loading}>
         <Spin size="large" />
       </div>
     );
@@ -120,7 +120,7 @@ export function PokemonDetails() {
 
   if (!pokemon) {
     return (
-      <div className="pokemon-details-empty">
+      <div className={styles.empty}>
         <Title level={3}>No Pokémon found</Title>
         <Text type="secondary">
           Use the back button to return to the home page
@@ -134,10 +134,9 @@ export function PokemonDetails() {
   };
 
   return (
-    <div className="pokemon-details-container">
+    <div className={styles.container}>
       <Row
         align="middle"
-        className="pokemon-details-row"
         gutter={[
           { xs: 12, sm: 16, md: 20, lg: 24 },
           { xs: 12, sm: 16, md: 20, lg: 24 },
